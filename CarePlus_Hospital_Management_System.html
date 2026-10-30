@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CarePlus Hospital | Management System</title>
+<style>
+:root{--navy:#073b66;--blue:#0879d9;--sky:#eaf6ff;--teal:#16b8a6;--ink:#18324b;--muted:#637b91;--line:#dceaf5;--white:#fff}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f4f9fd;color:var(--ink);line-height:1.55}
+a{color:inherit}
+header{position:sticky;top:0;z-index:10;background:var(--navy);color:white;box-shadow:0 4px 16px #062f5030}
+.nav-wrap{max-width:1180px;margin:auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px}
+.logo{width:42px;height:42px;border-radius:13px;background:#fff;color:var(--blue);display:grid;place-items:center;font-size:25px}
+nav{display:flex;gap:5px;flex-wrap:wrap}
+nav a{text-decoration:none;color:#e7f4ff;font-size:13px;font-weight:700;padding:10px 11px;border-radius:8px}
+nav a:hover,nav a:focus{background:#ffffff25;color:white}
+main{max-width:1180px;margin:auto;padding:22px 18px 45px}
+.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:20px;align-items:center;background:linear-gradient(120deg,#073b66,#0879d9);color:white;border-radius:22px;padding:36px;overflow:hidden;position:relative}
+.hero h1{font-size:clamp(30px,4vw,48px);line-height:1.1;margin:8px 0 14px}
+.hero p{max-width:570px;color:#e2f3ff}
+.eyebrow{text-transform:uppercase;letter-spacing:2px;font-size:12px;font-weight:800;color:#8ee8df}
+.hero-art{font-size:125px;text-align:center;filter:drop-shadow(0 8px 12px #00274755)}
+.btn{display:inline-block;text-decoration:none;border:0;border-radius:9px;padding:11px 17px;background:var(--blue);color:white;font-weight:700;cursor:pointer;font-size:14px}
+.btn.light{background:white;color:var(--navy);margin-left:8px}
+.btn.outline{background:white;color:var(--blue);border:1px solid #b8dafa}
+.stats,.feature-grid,.doctor-grid,.two-col{display:grid;gap:16px}
+.stats{grid-template-columns:repeat(4,1fr);margin:18px 0}
+.stat,.card,.feature,.doctor{background:white;border:1px solid var(--line);border-radius:15px;padding:19px;box-shadow:0 5px 16px #174e7510}
+.stat strong{display:block;font-size:25px;color:var(--blue)}
+.stat span,.muted{color:var(--muted);font-size:13px}
+.section{margin-top:36px;scroll-margin-top:95px}
+.section-head{margin-bottom:18px}
+.section-head h2{font-size:28px;margin:0;color:var(--navy)}
+.section-head p{margin:5px 0;color:var(--muted)}
+.feature-grid{grid-template-columns:repeat(4,1fr)}
+.feature .ico{font-size:28px}
+.feature h3{margin:8px 0 5px;font-size:17px}
+.two-col{grid-template-columns:1fr 1fr}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.field{display:flex;flex-direction:column;gap:6px}
+.field.full{grid-column:1/-1}
+label{font-size:13px;font-weight:700;color:#294c6a}
+input,select,textarea{width:100%;padding:11px 12px;border:1px solid #cbddeb;border-radius:8px;background:#fbfdff;font:inherit;color:var(--ink)}
+textarea{min-height:100px;resize:vertical}
+input:focus,select:focus,textarea:focus{outline:2px solid #8bc8ff;border-color:var(--blue)}
+.form-actions{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+.section-banner{background:linear-gradient(110deg,#e0f3ff,#f7fcff);border:1px solid var(--line);border-radius:16px;padding:23px;margin-bottom:18px;display:flex;align-items:center;gap:18px}
+.banner-ico{width:65px;height:65px;flex:0 0 65px;border-radius:18px;background:white;display:grid;place-items:center;font-size:34px;color:var(--blue)}
+.section-banner h2{margin:0;color:var(--navy);font-size:27px}
+.section-banner p{margin:4px 0 0;color:var(--muted)}
+.doctor-grid{grid-template-columns:repeat(3,1fr)}
+.doctor{padding:0;overflow:hidden}
+.doctor-top{background:linear-gradient(135deg,#e4f4ff,#c8e8ff);text-align:center;padding:22px;font-size:54px}
+.doctor-info{padding:16px}
+.doctor-info h3{margin:0;color:var(--navy)}
+.pill{display:inline-block;background:#e5f8f5;color:#087d72;border-radius:20px;padding:4px 9px;font-size:11px;font-weight:800}
+table{width:100%;border-collapse:collapse;min-width:650px;background:white}
+th{background:#e8f4ff;color:var(--navy);text-align:left;font-size:13px}
+th,td{padding:12px;border-bottom:1px solid var(--line);font-size:13px}
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px}
+.contact-info .contact-row{display:flex;gap:12px;align-items:flex-start;margin:16px 0}
+.contact-icon{width:38px;height:38px;flex:0 0 38px;background:var(--sky);border-radius:10px;display:grid;place-items:center}
+footer{background:#052e50;color:#d9efff;padding:22px;text-align:center;font-size:13px}
+.small-note{font-size:12px;color:var(--muted);margin-top:12px}
+@media(max-width:800px){.hero{grid-template-columns:1fr;padding:26px}.hero-art{font-size:85px}.stats,.feature-grid{grid-template-columns:repeat(2,1fr)}.doctor-grid{grid-template-columns:repeat(2,1fr)}.two-col{grid-template-columns:1fr}.nav-wrap{justify-content:center}.brand{width:100%;justify-content:center}nav{justify-content:center}nav a{padding:8px;font-size:12px}}
+@media(max-width:480px){main{padding:14px 10px 30px}.hero{padding:22px 18px}.stats,.feature-grid,.doctor-grid,.form-grid{grid-template-columns:1fr}.section-banner{padding:16px}.section-banner h2{font-size:22px}.field.full{grid-column:auto}.btn.light{margin:8px 0 0}.hero-art{display:none}}
+</style>
+</head>
+<body>
+<header>
+  <div class="nav-wrap">
+    <div class="brand"><div class="logo">✚</div><div>CarePlus <span style="font-weight:400">Hospital</span><div style="font-size:10px;color:#bce8ff;letter-spacing:1.5px">MANAGEMENT SYSTEM</div></div></div>
+    <nav aria-label="Main navigation">
+      <a href="#home">Home</a><a href="#registration">Patient Registration</a><a href="#doctors">Doctors</a><a href="#appointments">Appointments</a><a href="#records">Patient Records</a><a href="#contact">Contact Us</a>
+    </nav>
+  </div>
+</header>
+<main>
+<section id="home" class="hero">
+ <div><div class="eyebrow">Compassion • Care • Excellence</div><h1>Your Health,<br>Our Priority.</h1><p>Welcome to CarePlus Hospital, where experienced healthcare professionals and modern facilities work together to support your wellbeing.</p><a class="btn" href="#appointments">Book Appointment</a><a class="btn light" href="#services">Explore Services</a></div>
+ <div class="hero-art" aria-label="Medical symbol">⚕️</div>
+</section>
+<div class="stats">
+ <div class="stat"><strong>24/7</strong><span>Emergency Support</span></div><div class="stat"><strong>35+</strong><span>Qualified Doctors</span></div><div class="stat"><strong>12</strong><span>Departments</span></div><div class="stat"><strong>10k+</strong><span>Patients Cared For</span></div>
+</div>
+<section id="services" class="section">
+ <div class="section-head"><h2>Our Medical Services</h2><p>Quality care for every stage of life.</p></div>
+ <div class="feature-grid">
+  <article class="feature"><div class="ico">❤️</div><h3>Cardiology</h3><p class="muted">Heart health assessment and specialist care.</p></article>
+  <article class="feature"><div class="ico">🧠</div><h3>Neurology</h3><p class="muted">Diagnosis and care for nervous system conditions.</p></article>
+  <article class="feature"><div class="ico">🦴</div><h3>Orthopedics</h3><p class="muted">Bone, joint and mobility services.</p></article>
+  <article class="feature"><div class="ico">👶</div><h3>Pediatrics</h3><p class="muted">Friendly medical care for children.</p></article>
+ </div>
+</section>
+
+<section id="registration" class="section">
+ <div class="section-banner"><div class="banner-ico">📋</div><div><h2>Patient Registration</h2><p>Enter patient information in the registration form below.</p></div></div>
+ <div class="card"><h3>Patient Information</h3>
+  <form action="#registration" method="get"><div class="form-grid">
+   <div class="field"><label for="pname">Full Name *</label><input id="pname" name="patient_name" placeholder="Enter patient name" required></div>
+   <div class="field"><label for="age">Age *</label><input id="age" name="age" type="number" min="0" max="120" placeholder="Enter age" required></div>
+   <div class="field"><label for="gender">Gender *</label><select id="gender" name="gender" required><option value="">Select gender</option><option>Female</option><option>Male</option><option>Other</option></select></div>
+   <div class="field"><label for="phone">Phone Number *</label><input id="phone" name="phone" type="tel" placeholder="03XX-XXXXXXX" required></div>
+   <div class="field full"><label for="address">Address *</label><input id="address" name="address" placeholder="House, street, city" required></div>
+   <div class="field"><label for="blood">Blood Group</label><select id="blood" name="blood"><option>Select blood group</option><option>A+</option><option>A-</option><option>B+</option><option>B-</option><option>AB+</option><option>AB-</option><option>O+</option><option>O-</option></select></div>
+   <div class="field"><label for="problem">Symptoms / Health Problem</label><input id="problem" name="problem" placeholder="Briefly describe the problem"></div>
+  </div><div class="form-actions"><button class="btn" type="submit">Register Patient</button><button class="btn outline" type="reset">Reset Form</button></div></form>
+  <p class="small-note">Student demo: this HTML form does not store information in a database.</p>
+ </div>
+</section>
+
+<section id="doctors" class="section">
+ <div class="section-banner"><div class="banner-ico">🩺</div><div><h2>Meet Our Doctors</h2><p>Experienced professionals committed to your care.</p></div></div>
+ <div class="doctor-grid">
+  <article class="doctor"><div class="doctor-top">👩‍⚕️</div><div class="doctor-info"><h3>Dr. Ayesha Khan</h3><p class="muted">Cardiologist • MBBS, FCPS</p><span class="pill">Mon – Wed</span></div></article>
+  <article class="doctor"><div class="doctor-top">👨‍⚕️</div><div class="doctor-info"><h3>Dr. Ahmad Raza</h3><p class="muted">Neurologist • MBBS, MD</p><span class="pill">Tue – Thu</span></div></article>
+  <article class="doctor"><div class="doctor-top">👩‍⚕️</div><div class="doctor-info"><h3>Dr. Sana Farooq</h3><p class="muted">Pediatrician • MBBS, DCH</p><span class="pill">Mon – Fri</span></div></article>
+  <article class="doctor"><div class="doctor-top">👨‍⚕️</div><div class="doctor-info"><h3>Dr. Usman Ali</h3><p class="muted">Orthopedic Surgeon • MBBS, FCPS</p><span class="pill">Wed – Sat</span></div></article>
+  <article class="doctor"><div class="doctor-top">👩‍⚕️</div><div class="doctor-info"><h3>Dr. Zainab Malik</h3><p class="muted">General Physician • MBBS</p><span class="pill">Mon – Sat</span></div></article>
+  <article class="doctor"><div class="doctor-top">👨‍⚕️</div><div class="doctor-info"><h3>Dr. Faisal Ahmed</h3><p class="muted">Gynecologist • MBBS, FCPS</p><span class="pill">Tue – Fri</span></div></article>
+ </div>
+</section>
+
+<section id="appointments" class="section">
+ <div class="section-banner"><div class="banner-ico">📅</div><div><h2>Book an Appointment</h2><p>Choose a doctor and preferred visit time.</p></div></div>
+ <div class="two-col">
+  <div class="card"><h3>Appointment Details</h3><form action="#appointments" method="get"><div class="form-grid">
+   <div class="field full"><label for="aname">Patient Name *</label><input id="aname" name="appointment_patient" placeholder="Enter patient name" required></div>
+   <div class="field full"><label for="doctor">Select Doctor *</label><select id="doctor" name="doctor" required><option value="">Choose doctor</option><option>Dr. Ayesha Khan — Cardiology</option><option>Dr. Ahmad Raza — Neurology</option><option>Dr. Sana Farooq — Pediatrics</option><option>Dr. Usman Ali — Orthopedics</option><option>Dr. Zainab Malik — General Medicine</option><option>Dr. Faisal Ahmed — Gynecology</option></select></div>
+   <div class="field"><label for="adate">Appointment Date *</label><input id="adate" name="date" type="date" required></div>
+   <div class="field"><label for="atime">Appointment Time *</label><select id="atime" name="time" required><option value="">Select time</option><option>09:00 AM</option><option>10:00 AM</option><option>11:30 AM</option><option>02:00 PM</option><option>04:00 PM</option></select></div>
+   <div class="field full"><label for="reason">Reason for Appointment</label><textarea id="reason" name="reason" placeholder="Describe the reason for your visit"></textarea></div>
+  </div><div class="form-actions"><button class="btn" type="submit">Request Appointment</button><button class="btn outline" type="reset">Clear</button></div></form><p class="small-note">Demo form only; no real appointment is booked.</p></div>
+  <div class="card"><h3>Sample Upcoming Appointments</h3><div class="table-wrap"><table><thead><tr><th>Date</th><th>Doctor</th><th>Time</th></tr></thead><tbody><tr><td>2026-11-02</td><td>Dr. Ayesha Khan</td><td>10:00 AM</td></tr><tr><td>2026-11-03</td><td>Dr. Ahmad Raza</td><td>11:30 AM</td></tr><tr><td>2026-11-04</td><td>Dr. Sana Farooq</td><td>02:00 PM</td></tr></tbody></table></div><p class="small-note">Sample data for assignment demonstration.</p></div>
+ </div>
+</section>
+
+<section id="records" class="section">
+ <div class="section-banner"><div class="banner-ico">🗂️</div><div><h2>Patient Records</h2><p>Sample patient data displayed in an HTML table.</p></div></div>
+ <div class="card"><div class="table-wrap"><table><thead><tr><th>Patient ID</th><th>Patient Name</th><th>Age</th><th>Gender</th><th>Blood Group</th><th>Doctor</th><th>Appointment Date</th></tr></thead><tbody>
+ <tr><td>P001</td><td>Ayesha Noor</td><td>28</td><td>Female</td><td>B+</td><td>Dr. Ayesha Khan</td><td>2026-11-02</td></tr>
+ <tr><td>P002</td><td>Usman Ali</td><td>34</td><td>Male</td><td>O+</td><td>Dr. Ahmad Raza</td><td>2026-11-03</td></tr>
+ <tr><td>P003</td><td>Sana Malik</td><td>22</td><td>Female</td><td>A+</td><td>Dr. Sana Farooq</td><td>2026-11-04</td></tr>
+ <tr><td>P004</td><td>Ali Raza</td><td>45</td><td>Male</td><td>AB+</td><td>Dr. Usman Ali</td><td>2026-11-05</td></tr>
+ <tr><td>P005</td><td>Fatima Noor</td><td>31</td><td>Female</td><td>O-</td><td>Dr. Zainab Malik</td><td>2026-11-06</td></tr>
+ </tbody></table></div><p class="small-note">All names and records above are fictional examples, not real patient information.</p></div>
+</section>
+
+<section id="contact" class="section">
+ <div class="section-banner"><div class="banner-ico">✉️</div><div><h2>Contact Us</h2><p>We are here to help with general questions.</p></div></div>
+ <div class="two-col">
+  <div class="card"><h3>Send Us a Message</h3><form action="#contact" method="get"><div class="form-grid">
+   <div class="field full"><label for="cname">Your Name *</label><input id="cname" name="contact_name" placeholder="Enter your name" required></div>
+   <div class="field full"><label for="email">Email Address *</label><input id="email" name="email" type="email" placeholder="name@example.com" required></div>
+   <div class="field full"><label for="subject">Subject</label><select id="subject" name="subject"><option>General Inquiry</option><option>Appointment Question</option><option>Departments and Services</option><option>Feedback</option></select></div>
+   <div class="field full"><label for="message">Message *</label><textarea id="message" name="message" placeholder="Write your message..." required></textarea></div>
+  </div><div class="form-actions"><button class="btn" type="submit">Send Message</button><button class="btn outline" type="reset">Reset</button></div></form><p class="small-note">This demo form does not send messages to a hospital.</p></div>
+  <div class="card contact-info"><h3>Hospital Information</h3>
+   <div class="contact-row"><div class="contact-icon">📍</div><div><strong>Address</strong><div class="muted">123 Hospital Road, Narowal, Pakistan</div></div></div>
+   <div class="contact-row"><div class="contact-icon">☎️</div><div><strong>Phone</strong><div class="muted">042-12345678<br>+92 300 1234567</div></div></div>
+   <div class="contact-row"><div class="contact-icon">✉️</div><div><strong>Email</strong><div class="muted">info@careplushospital.example</div></div></div>
+   <div class="contact-row"><div class="contact-icon">🕒</div><div><strong>Working Hours</strong><div class="muted">Monday – Saturday: 8:00 AM – 10:00 PM<br>Emergency support: 24/7</div></div></div>
+  </div>
+ </div>
+</section>
+</main>
+<footer><strong>✚ CarePlus Hospital</strong><br>Compassionate care for a healthier tomorrow.<br>© 2026 CarePlus Hospital — Student HTML Project</footer>
+</body>
+</html>
