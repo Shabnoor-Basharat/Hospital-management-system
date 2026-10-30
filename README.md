@@ -1,2 +1,2 @@
-# Hospital-management-system
+index.html
 Hospital management system BS CS project 
